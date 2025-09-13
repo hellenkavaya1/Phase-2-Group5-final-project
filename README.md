@@ -149,6 +149,8 @@ Identified genres with the highest votes and popularity.
 
 Visualization: Top 15 genres by rating & votes.
 
+![Top Genres](images/top_genres.png)
+
 
 ## Objective 2: Average Runtime
 We split the genres column into a list of genres for each movie and then used explode to create separate rows for each genre. This allows us to analyze runtime and other metrics by individual genre.
@@ -178,7 +180,7 @@ agg_runtime_df
 Ploting the genre verse average runtime
 
 Bar chart of average runtime across genres.
-
+![Average Runtime](images/avg_runtime.png)
 
 ## Objective 3: Best Directors & Writers
 We retrieved the directors data and selected the top 30 movies by average rating. Then, we grouped the data by person_id and primary_name and calculated the most frequent (mode) average rating for each director. This gives a representative rating per director.
@@ -205,7 +207,9 @@ mode_df = (
 mode_df.sort_values(by = "averagerating", ascending = False).head(15)
 ```
 ### Visualization 
-Bar charts of top 15 directors and writers.
+Bar charts of top 15 directors 
+![Top Directors](images/top_directors.png)
+
 ### Checking the best film writers
 We first read the writers data from the database into a DataFrame called writers_df. Then, we sort the data by averagerating in descending order and select the top 30 rows to focus on the highest-rated writers.
 
@@ -222,6 +226,8 @@ plt.xticks(rotation=45, ha="right")  # Rotate x-axis labels for readability
 plt.ylim(0, 10.5)  # Slightly above 10 for better visualization
 plt.show()
 ```
+![Top Writers](images/top_writers.png)
+
 
 ## Objective 4: Revenue vs Budget
 
@@ -245,6 +251,9 @@ we then plotted top 10 genres from Agg_top_50_worldwide_profit
 
 Visualization: Line chart of top 10 genres by profit.
 
+![Top Genres by Profit](images/worldwide_profit.png)
+
+
 ## Modeling – Linear Regression
 
 We modeled the relationship between production budget and worldwide gross.
@@ -262,7 +271,7 @@ Model: Simple Linear Regression
 Having 
 x = production_budget
 y = worldwide_gross
-
+```text 
 OLS Regression Results                            
 ==============================================================================
 Dep. Variable:        worldwide_gross   R-squared:                       0.560
@@ -285,7 +294,7 @@ Prob(Omnibus):                  0.000   Jarque-Bera (JB):           172398.262
 Skew:                           3.053   Prob(JB):                         0.00
 Kurtosis:                      29.044   Cond. No.                     6.57e+07
 ===============================================
-
+```
 ### Equation:
 Regression line: y = 3.1269x + -7285667.0546
 ### The model can be explained as one unit increase in production budget  increases world wide gross by 3.1268 units 
