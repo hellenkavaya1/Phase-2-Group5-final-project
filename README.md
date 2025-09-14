@@ -305,7 +305,8 @@ Regression line: y = 3.1269x + -7285667.0546
 R² = 0.56 → about 56% of variation in worldwide gross is explained by production budget while the other 44% is explained by factors outside the model.
 F-statistics of 7355.2, meaning that the model is highly statistically significant. P- value of 0.0 implies extreme significance. An Overwhelming evidence to reject the null hypotheses and conclude that there is a linear relationship between production coast and world wide gross.
 ## Visualization
-![Regression](images/regression.png)
+![Regression Plot](images/regression.PNG)
+
 ## Key Insights
 
 Genres like Action, Adventure, Sci-Fi dominate both ratings and profitability.
