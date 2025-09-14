@@ -57,6 +57,9 @@ movie_budgets (production budget, gross earnings)
 movie_gross (domestic & foreign gross)
 
 ## Data Preparation
+data used The following datasets have been used in this project:¶
+#### im.db > Used to address objectives 1,2 and 3
+#### tn.movie_budgets.csv.gz > Used to address objectives 4
 
 ### Importing Libraries
 
@@ -83,10 +86,7 @@ movie_id
 iv) Writers
 person_id
 movie_id
-v) Persons
-primary_name
-birth_date
-death_date
+
 ### We Merged both the movie_ratings table and movie_basics table
 
 ```python
@@ -108,7 +108,7 @@ ratings_basics_df.head(4)
 ### Handling Missing Values - ratings_basics_df
 To address missing values, we first noticed that the genres column contains many categories.
 Instead of filling missing runtimes with a single global value, we grouped the data by genre,
-calculated the median runtime for each genre, and then used those medians to fill the missing values genre by gre.
+calculated the mean runtime for each genre, and then used those mean to fill the missing values genre by gre.
 ### Using this method, we successfully filled 6,797 missing runtimes.
 After that step, only a small fraction of missing values remained (around 1% of the dataset).
 Given how minimal this is, we decided to drop these rows:
@@ -179,10 +179,9 @@ agg_runtime_df
 ### Visualization
 Ploting the genre verse average runtime
 
-Bar chart of average runtime across genres.
-![Average Runtime](images/avg_runtime.png)
+![Average Runtime](images/avg1_runtime.png)
 
-## Objective 3: Best Directors & Writers
+## Objective 3: Best Directors & Writers( check on this )
 We retrieved the directors data and selected the top 30 movies by average rating. Then, we grouped the data by person_id and primary_name and calculated the most frequent (mode) average rating for each director. This gives a representative rating per director.
 ```python
 query3 = """
@@ -229,7 +228,11 @@ plt.show()
 ![Top Writers](images/top_writers.png)
 
 
-## Objective 4: Revenue vs Budget
+## Objective 4: Revenue vs Budget       
+To address this objective, we need the following datasets. The columns used have been listed as well:
+#### tn.movie_budgets.csv.gz
+Production_budget
+domestic_gross
 
 we Cleaned and analyzed production budgets & worldwide gross.
 We then Aggregated (get average) the worldwide_Profit by Genre Group
@@ -301,7 +304,8 @@ Regression line: y = 3.1269x + -7285667.0546
 
 R² = 0.56 → about 56% of variation in worldwide gross is explained by production budget while the other 44% is explained by factors outside the model.
 F-statistics of 7355.2, meaning that the model is highly statistically significant. P- value of 0.0 implies extreme significance. An Overwhelming evidence to reject the null hypotheses and conclude that there is a linear relationship between production coast and world wide gross.
-
+## Visualization
+![Regression](images/regression.png)
 ## Key Insights
 
 Genres like Action, Adventure, Sci-Fi dominate both ratings and profitability.
@@ -313,16 +317,51 @@ Several directors and writers consistently deliver high-rated films.
 High budgets often lead to higher worldwide grosses, but profitability depends on genre selection.
 
 
-## Conclusion
+## Summary of Analysis Done:
 
-Top 3 worldwide highest profit-generating genres include:
-Drama, Romance, Historical/Disaster
-Action,Adventure, Sci-Fi
-Action,Crime, Thriller
-Comedy ,Documentary ,Fantasy genre had the highest number of votes, however in terms of profits it is not among the top fifteen worldwide.
+### Top 5 Genres:
+#### According to average rating:
 
-There is a strong, statistically significant predictive relationship between production budget and worldwide gross. The analysis proves correlation, not causation i.e.,
+Comedy,Documentary,Fantasy
+Documentary,Family,Musical
+Game-Show
+Drama,Short
+Documentary,News,Sport
 
-Movies expected to be huge blockbusters (e.g., sure-fire sequels, superhero movies) are given large budgets because studios are confident they will make a lot of money.
+#### According to the Number of Votes:
 
-Both high budgets and high grosses are caused by a third factor, like the involvement of A-list directors or stars.
+Action, Adventure, Sci-Fi
+Action, Adventure, Fantasy
+Adventure, Animation, Comedy
+Drama
+Comedy, Drama, Romance
+
+#### Average movie runtime for 5 randomly selected Genres
+
+Action - 104 minutes
+Adult - 87 Minutes
+Adventure- 94 minutes
+Animation - 85 Minutes
+Comedy - 97 Minutes
+Top 5 Best Directors
+Mohamed Ulad-Mohand
+Cristina Duarte
+Robert Tutak
+Ivana Diniz
+Stephen Pee
+
+#### Top 5 Best Writers
+Mohamed Ulad-Mohand
+Ivana Diniz
+Daniel Alexander
+Robert Tutak
+Ana Beatriz Nogueira
+
+#### Top 5 movie genres that have the highest revenue with low production cost
+Drama, Romance, historical/disaster Action, Adventure, Sci-Fi
+Action, Crime, Thriller -Animation, Family, Fantasy, Musical
+Family, fantasy, Musical, Romance
+Hypothesis Testing and Test of Linearity
+There is a linear relationship between worldwide gross and production budget
+
+There is a strong, statistically significant predictive relationship between production budget and worldwide gross. The analysis proves correlation, not causation. This could mean that Movies expected to be huge blockbusters (e.g., sure-fire sequels, superhero movies) are given large budgets because studios are confident they will make a lot of money or both high budgets and high grosses are caused by a third factor, like the involvement of A-list directors or stars.
